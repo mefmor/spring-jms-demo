@@ -20,3 +20,17 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ```
 
 Connection parameters can be find in **application.properties**
+
+## SSL connection and certificates
+If you need to use an SSL certificate when connectin, you should add configs to application.properties, e. g.:
+```
+ibm.mq.sslChipherSuite=TLS_RSA_WITH_AES_128_CBC_SHA256
+ibm.mq.userAuthenticationMQCSP=true
+ibm.mq.useIBMChiperMappings=false
+```
+and before start a connection with JMS Template set path to certificates in the system properties, e. g.:
+```java
+System.setProperty("javax.net.ssl.trustStore", "path_to_folder\\trust.jks");
+System.setProperty("javax.net.ssl.keyStore", "path_to_folder\\key.jks");
+System.setProperty("javax.net.ssl.trustStorePassword", "password");
+```
